@@ -40,12 +40,14 @@ const FirstPage = () => {
       };
 
       const fetchApplications = async () => {
-         try {
-            const response = await fetch(`http://localhost:5000/getUserApplications/${userData._id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
-            const data = await response.json();
-            setAppNum(data.applications.length);
-         } catch (error) {
-            console.error('Error fetching applications:', error);
+         if (userData._id !== null) {
+            try {
+               const response = await fetch(`http://localhost:5000/getUserApplications/${userData._id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+               const data = await response.json();
+               setAppNum(data.applications.length);
+            } catch (error) {
+               console.error('Error fetching applications:', error);
+            }
          }
       };
 
@@ -98,7 +100,7 @@ const FirstPage = () => {
          <div>
             {session_token !== null && userData !== null ? <SideNavbar userType={userData.userType} /> : <NavBar />}
             <div className="hero bg-gradient-to-r from-blue-500 to-green-500 text-white py-16">
-               {userData.userType === 'Job Seeker' ?
+               {userData !== null && userData.userType === 'Job Seeker' ?
                   <div className="container mx-auto text-center">
                      <h1 className="text-4xl font-bold mb-4">Find Your Dream Job</h1>
                      <p className="text-xl mb-8">Explore thousands of job opportunities according to your needs</p>

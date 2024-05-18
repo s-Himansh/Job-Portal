@@ -133,7 +133,7 @@ function CompanyReviews() {
                             ))}
                         </div>
 
-                        <div className="bg-white shadow-lg rounded-lg p-6">
+                        { localStorage.getItem('session_token') !== null ? <div className="bg-white shadow-lg rounded-lg p-6">
                             <h3 className="text-xl font-bold text-gray-800 mb-4">Add a Review</h3>
                             <input
                                 type="text"
@@ -169,7 +169,7 @@ function CompanyReviews() {
                             >
                                 Submit Review
                             </button>
-                        </div>
+                        </div> : <h1 className="text-3xl font-semibold mb-3">You must login to add a review</h1>}
                     </div>
                 )}
             </div>
