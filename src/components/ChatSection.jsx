@@ -58,7 +58,7 @@ function ChatSection() {
                 {localStorage.getItem('session_token') !== null ? <SideNavbar userType={JSON.parse(localStorage.getItem('user')).userType} /> : <NavBar />}
                 <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6">
                     <h1 className="text-3xl font-bold text-center mb-6">Chat with {userData.userType === 'Recruiter' ? 'Applicant' : 'Recruiter'}</h1>
-                    <div className="overflow-y-auto h-[33rem] mb-4 border rounded-lg p-4 bg-gray-50">
+                    <div className="overflow-y-auto no-scrollbar h-[33rem] mb-4 border rounded-lg p-4 bg-gray-50">
                         {messages.map((message, index) => (
                             <div key={index} className={`mb-2 flex ${message.type === userData.userType ? 'justify-end' : 'justify-start'}`}>
                                 {/* <div className={`max-w-xs p-3 rounded-lg ${message.type === 'Job Seeker' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}>

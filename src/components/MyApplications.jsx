@@ -31,7 +31,7 @@ function MyApplications() {
         application.jobData.jobProfile.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    
+
 
     return (
         <div className='bg-gradient-to-br from-blue-100 to-green-100 min-h-screen'>
@@ -44,9 +44,12 @@ function MyApplications() {
                 {localStorage.getItem('session_token') !== null ? <SideNavbar userType={JSON.parse(localStorage.getItem('user')).userType} /> : <NavBar />}
                 <h1 className="text-3xl font-semibold mb-4">My Applications</h1>
                 <div className="flex items-center mb-4">
+                    <svg className='mr-3 md:font-bold' xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
                     <input
                         type="text"
-                        placeholder="Search..."
+                        placeholder=" Search..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="border border-gray-300 rounded-md py-2 px-4 w-64 focus:outline-none"
