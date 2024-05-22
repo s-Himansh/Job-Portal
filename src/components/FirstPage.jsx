@@ -175,7 +175,7 @@ const FirstPage = () => {
          <div className="container mx-auto py-8">
             <h1 className="text-3xl font-semibold mb-4 italic text-center">Search Your Preference</h1>
             <div className="flex flex-wrap justify-center items-center space-x-4 bg-white shadow-md p-6 rounded-lg">
-               <div className="">
+               <div className="mb-4">
                   <input
                      type="text"
                      name="jobProfile"
