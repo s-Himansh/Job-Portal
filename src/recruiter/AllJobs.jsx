@@ -71,7 +71,7 @@ function AllJobs() {
 
 
     return (
-        <div>
+        <div className='min-h-screen bg-gradient-to-br from-blue-100 to-blue-100'>
             {localStorage.getItem('session_token') !== null ? <SideNavbar userType={JSON.parse(localStorage.getItem('user')).userType} /> : <NavBar />}
             <div className="inline-block font-bold py-2 px-4 rounded bg-gradient-to-br from-blue-100 to-green-100 m-5 border-2 border-gray-600 hover:bg-gray-100">
                 <Link to='/'>

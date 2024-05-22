@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import SideNavbar from './SideNavbar';
+import Modal from 'react-modal';
 
 function JobApplications() {
    const { jobId } = useParams();
 
    const [applications, setApplications] = useState([]);
+   const [isModalOpen, setIsModalOpen] = useState(false);
 
    useEffect(() => {
       const fetchApplications = async (jobId) => {
@@ -19,11 +21,16 @@ function JobApplications() {
       fetchApplications(jobId);
    });
 
+   const closeModal = () => {
+      setIsModalOpen(false);
+      navigate('/login');
+  };
+
    const handleAccept = async (applicationData) => {
       const response = await fetch(`http://localhost:5000/updateApplication/${applicationData._id + "Accepted"}`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       const json = await response.json();
       if (json.success) {
-         alert('Accepted Successfully');
+         setIsModalOpen(true);
          console.log('success');
       } else {
          alert('Something bad happened! Try again');
@@ -89,6 +96,23 @@ function JobApplications() {
             </div>
 
          }
+         <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                className="fixed inset-0 flex items-center justify-center z-50"
+                overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-40"
+            >
+                <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+                    <h2 className="text-2xl font-bold mb-4">Accepted Successfully</h2>
+                    <p className="text-gray-700 mb-6">Talk with applicant for further processing</p>
+                    <button
+                        onClick={closeModal}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                        Close
+                    </button>
+                </div>
+            </Modal>
       </>
    );
 }

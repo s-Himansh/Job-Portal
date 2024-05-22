@@ -5,11 +5,11 @@ import NavBar from './NavBar';
 
 function UserProfile(props) {
    const [editableData, setEditableData] = useState({
-      firstName: 'Himanshu',
-      lastName: 'Sharma',
-      email: 'sharma2003hs134@gmail.com',
-      password: '********',
-      userType: 'Job Seeker'
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      userType: ''
    });
    const [userId, setUserId] = useState('');
    const location = useLocation();

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 const Login = () => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const navigate = useNavigate();
-
+   const [isModalOpen, setIsModalOpen] = useState(false);
 
    const handleLogin = async (event) => {
       event.preventDefault();
@@ -16,8 +17,11 @@ const Login = () => {
          localStorage.setItem('session_token', jsonData.authToken);
          navigate('/');
       } else {
-         alert('Please enter valid credentials');
+         setIsModalOpen(true);
       }
+   };
+   const closeModal = () => {
+      setIsModalOpen(false);
    };
 
    useEffect(() => {
@@ -68,6 +72,23 @@ const Login = () => {
                </div>
             </div>
          </div>
+         <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            className="fixed inset-0 flex items-center justify-center z-50"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-40"
+         >
+            <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+               <h2 className="text-2xl font-bold mb-4">OOPS!!!</h2>
+               <p className="text-gray-700 mb-6">Please enter valid credentials.</p>
+               <button
+                  onClick={closeModal}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+               >
+                  Close
+               </button>
+            </div>
+         </Modal>
       </>
    );
 };

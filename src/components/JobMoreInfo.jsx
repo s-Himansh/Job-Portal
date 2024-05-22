@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import SideNavbar from './SideNavbar'
+import Modal from 'react-modal';
 
 function JobMoreInfo() {
     const { jobId } = useParams();
@@ -10,6 +11,7 @@ function JobMoreInfo() {
     const currURL = location.pathname;
     const userId = JSON.parse(localStorage.getItem('user'))._id;
     const userData = JSON.parse(localStorage.getItem('user'));
+    const [isModalOpen, setIsModalOpen] = useState(false);
     // console.log(currURL);
 
     // Sample data for job details
@@ -42,6 +44,10 @@ function JobMoreInfo() {
 
     const [showPopup, setShowPopup] = useState(false);
     const [resumeFile, setResumeFile] = useState(null);
+    const closeModal = () => {
+        setIsModalOpen(false);
+        navigate('/login');
+    };
 
 
     useEffect(() => {
@@ -104,7 +110,7 @@ function JobMoreInfo() {
             const json = await response.json();
 
             if (json.success) {
-                alert('Application submitted successfully!')
+                setIsModalOpen(true);
                 console.log('Application submitted successfully!');
             } else {
                 alert('Failed to submit application.');
@@ -245,6 +251,23 @@ function JobMoreInfo() {
                 </div>
             )}
 
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                className="fixed inset-0 flex items-center justify-center z-50"
+                overlayClassName="fixed inset-0 bg-black bg-opacity-50 z-40"
+            >
+                <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+                    <h2 className="text-2xl font-bold mb-4">Application Submitted Successfully</h2>
+                    <p className="text-gray-700 mb-6">Have pateince. Let the recruiter review your application</p>
+                    <button
+                        onClick={closeModal}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                        Close
+                    </button>
+                </div>
+            </Modal>
 
 
 
